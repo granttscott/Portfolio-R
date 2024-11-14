@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styles from './Pig.module.css';
 import Dice from '../components/Dice';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Pig() {
   const [scores, setScores] = useState({ player1: 0, player2: 0 });
@@ -51,9 +52,14 @@ function Pig() {
     setActivePlayer(1);
     setIsPlaying(true);
   };
+  const navigate = useNavigate();
 
   return (
         <div className={styles.gameContainer}>
+        <button className="back" onClick={() => navigate(-1)}>Back</button>
+        <Link to="/">
+          <button className="home">Home</button>
+        </Link>
           <button className={styles.btnNew} onClick={handleNewGame}>
             🔄 New Game
           </button>
@@ -71,7 +77,9 @@ function Pig() {
               </div>
             </div>
 
-            <Dice value={diceValue} isRolling={isRolling} />
+            <div className={styles.diceContainer}>
+              <Dice value={diceValue} isRolling={isRolling} />
+            </div>
     
             <div className={`${styles.player} ${activePlayer === 2 ? styles.active : ''}`}>
               <h2>Player 2</h2>
@@ -87,7 +95,7 @@ function Pig() {
             <button 
               className={styles.btnRoll} 
               onClick={handleRollDice}
-              disabled={!isPlaying}
+              disabled={!isPlaying || isRolling}
             >
                   🎲 Roll Dice
         </button>

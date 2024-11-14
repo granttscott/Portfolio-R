@@ -32,9 +32,10 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
-  min-width: 320px;
+  min-width: 100%;
   min-height: 100vh;
   background-color: var(--secondary-color);
+  overflow-x: hidden;
 }
 
 h1 {
@@ -234,4 +235,28 @@ button:focus-visible {
   margin: 0;
   padding: 0;
   margin-top: 2rem;
+}
+
+@media screen and (max-width: 768px) {
+  #root {
+    padding: 0.5rem;
+  }
+  
+  .projects-container {
+    padding: 1rem;
+  }
+  
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  
+  .header-container {
+    padding: 1rem 0.5rem;
+  }
+  
+  .header-links {
+    flex-direction: column;
+    gap: 1rem;
+  }
 }
