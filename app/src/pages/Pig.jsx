@@ -32,7 +32,11 @@ function Pig() {
   }, 1500);
 };
   const handleHold = () => {
-    if (scores[`player${activePlayer}`] >= 100) {
+    if ((scores[`player${activePlayer}`] + currentScore) >= 10) {
+      setScores(prevScores => ({
+        ...prevScores,
+        [`player${activePlayer}`]: prevScores[`player${activePlayer}`] + currentScore
+      }));
       setIsPlaying(false);
       return;
     }
@@ -42,8 +46,6 @@ function Pig() {
     }));
     setCurrentScore(0);
     setActivePlayer(activePlayer === 1 ? 2 : 1);
-    console.log(scores)
-    console.log(currentScore)
   };
 
   const handleNewGame = () => {
