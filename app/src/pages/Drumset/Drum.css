@@ -1,0 +1,80 @@
+.drum-kit {
+    text-align: center;
+    background-color: #fff;
+}
+
+.drum-kit h1 {
+    font-size: 5rem;
+    color: #DBEDF3;
+    font-family: "Arvo", cursive;
+    text-shadow: 3px 0 #DA0463;
+}
+
+.drum-kit footer {
+    color: #DBEDF3;
+    font-family: sans-serif;
+}
+
+.drum-kit .z {
+    background-image: url("../../assets/images/crash.png");
+}
+
+.drum-kit .x {
+    background-image: url("../../assets/images/kick.png");
+}
+
+.drum-kit .c {
+    background-image: url("../../assets/images/snare.png");
+}
+
+.drum-kit .v {
+    background-image: url("../../assets/images/tom1.png");
+}
+
+.drum-kit .b {
+    background-image: url("../../assets/images/tom2.png");
+}
+
+.drum-kit .n {
+    background-image: url("../../assets/images/tom3.png");
+}
+
+.drum-kit .m {
+    background-image: url("../../assets/images/tom4.png");
+}
+
+.drum-kit .set {
+    margin: 10% auto;
+}
+
+.drum-kit .game-over {
+    background-color: red;
+    opacity: 0.8;
+}
+
+.drum-kit .pressed {
+    box-shadow: 0 3px 4px 0 #DBEDF3;
+    opacity: 0.5;
+}
+
+.drum-kit .red {
+    color: red;
+}
+
+.drum-kit .drum {
+    outline: none;
+    border: 10px solid #e8d9ae;
+    font-size: 5rem;
+    font-family: 'Arvo', cursive;
+    line-height: 2;
+    font-weight: 900;
+    color: #DA0463;
+    text-shadow: 3px 0 #DBEDF3;
+    border-radius: 15px;
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    text-align: center;
+    margin: 10px;
+    background-color: white;
+}
