@@ -1,5 +1,4 @@
 import { Box, Typography, Container, keyframes } from '@mui/material';
-import { Link } from 'react-router-dom';
 
 const slideIn = keyframes`
   0% {
@@ -31,7 +30,7 @@ const projectTitleStyle = {
   fontWeight: 600
 };
 
-function Projects() {
+function OtherWebsites() {
   return (
     <Box 
       sx={{ 
@@ -39,8 +38,7 @@ function Projects() {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center',
-        py: 4
+        paddingTop: 20
       }}
     >
       <Container maxWidth="lg">
@@ -58,7 +56,7 @@ function Projects() {
             textAlign: 'center'
           }}
         >
-          Projects
+          Other Websites
         </Typography>
 
         <Box 
@@ -71,102 +69,54 @@ function Projects() {
             mx: 'auto'
           }}
         >
-          {/* Art Project */}
-          <Link to="/art" style={{ textDecoration: 'none' }}>
+          <a href="https://loading-969b6.web.app/" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
             <Box sx={projectCardStyle}>
               <Typography variant="h5" sx={projectTitleStyle}>
-                Mondrian Art
+                Loading
               </Typography>
               <Typography variant="body2" sx={{ color: '#666', mt: 1 }}>
-                CSS Grid recreation of Mondrian's art style
+                Interactive loading experience with a twist
               </Typography>
             </Box>
-          </Link>
+          </a>
 
-          {/* Blog Project */}
-          <Link to="/blog" style={{ textDecoration: 'none' }}>
-            <Box sx={projectCardStyle}>
-              <Typography variant="h5" sx={projectTitleStyle}>
-                Interactive Blog
-              </Typography>
-              <Typography variant="body2" sx={{ color: '#666', mt: 1 }}>
-                Create, read, and manage blog posts
-              </Typography>
-            </Box>
-          </Link>
-
-          {/* Games */}
-          <Link to="/rps" style={{ textDecoration: 'none' }}>
-            <Box sx={projectCardStyle}>
-              <Typography variant="h5" sx={projectTitleStyle}>
-                Rock Paper Scissors
-              </Typography>
-              <Typography variant="body2" sx={{ color: '#666', mt: 1 }}>
-                Classic game for 1-2 players
-              </Typography>
-            </Box>
-          </Link>
-
-          <Link to="/simon" style={{ textDecoration: 'none' }}>
-            <Box sx={projectCardStyle}>
-              <Typography variant="h5" sx={projectTitleStyle}>
-                Simon
-              </Typography>
-              <Typography variant="body2" sx={{ color: '#666', mt: 1 }}>
-                Memory sequence game
-              </Typography>
-            </Box>
-          </Link>
-
-          <Link to="/drumset" style={{ textDecoration: 'none' }}>
-            <Box sx={projectCardStyle}>
-              <Typography variant="h5" sx={projectTitleStyle}>
-                Drum Set
-              </Typography>
-              <Typography variant="body2" sx={{ color: '#666', mt: 1 }}>
-                Interactive drum kit with keyboard controls
-              </Typography>
-            </Box>
-          </Link>
-
-          <Link to="/pig" style={{ textDecoration: 'none' }}>
-            <Box sx={projectCardStyle}>
-              <Typography variant="h5" sx={projectTitleStyle}>
-                Pig Game
-              </Typography>
-              <Typography variant="body2" sx={{ color: '#666', mt: 1 }}>
-                Dice-based strategy game
-              </Typography>
-            </Box>
-          </Link>
-
-          {/* Complete Websites */}
-          <Link to="/other-websites" style={{ textDecoration: 'none' }}>
-            <Box sx={projectCardStyle}>
-              <Typography variant="h5" sx={projectTitleStyle}>
-                Other Websites
-              </Typography>
-              <Typography variant="body2" sx={{ color: '#666', mt: 1 }}>
-                Collection of standalone web applications
-              </Typography>
-            </Box>
-          </Link>
-
-          {/* Notes App */}
           <a href="https://keeper-c0904.web.app/" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
             <Box sx={projectCardStyle}>
               <Typography variant="h5" sx={projectTitleStyle}>
                 Notes
               </Typography>
               <Typography variant="body2" sx={{ color: '#666', mt: 1 }}>
-                Note-taking app with personal notes behind Google authentication
+                Note-taking app with with Google authentication
               </Typography>
             </Box>
           </a>
+
+          <a href="https://scottdevelopmentcompanies.com/" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+            <Box sx={projectCardStyle}>
+              <Typography variant="h5" sx={projectTitleStyle}>
+                Scott Development
+              </Typography>
+              <Typography variant="body2" sx={{ color: '#666', mt: 1 }}>
+                Development company portfolio
+              </Typography>
+            </Box>
+          </a>
+
+          <a href="https://homepaversconstruction.com/" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+            <Box sx={projectCardStyle}>
+              <Typography variant="h5" sx={projectTitleStyle}>
+                Home Pavers Construction
+              </Typography>
+              <Typography variant="body2" sx={{ color: '#666', mt: 1 }}>
+                Paving company sales page
+              </Typography>
+            </Box>
+          </a>
+
         </Box>
       </Container>
     </Box>
   );
 }
 
-export default Projects;
+export default OtherWebsites; 

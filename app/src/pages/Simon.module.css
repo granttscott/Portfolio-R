@@ -6,9 +6,10 @@
 .buttonGrid {
   display: grid;
   grid-template-columns: repeat(2, 200px);
-  gap: 25px;
+  gap: 1rem;
   justify-content: center;
-  margin: auto;
+  align-items: center;
+  margin: 0 auto;
   width: 50%;
 }
 
@@ -85,75 +86,128 @@
 #leaderboard-list li {
   margin: 5px 0;
 }
-.modal {
-  display: none;
+.scoreModalOverlay {
   position: fixed;
-  z-index: 1;
-  left: 0;
   top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(1, 31, 63, 0.8);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
-.modal-content {
-  background-color: #011F3F;
-  margin: 15% auto;
-  padding: 20px;
-  border: 5px solid #FEF2BF;
+
+.scoreModal {
+  background-color: var(--primary-color);
+  padding: 2rem;
   border-radius: 15px;
-  width: 80%;
-  max-width: 400px;
   text-align: center;
-  color: #FEF2BF;
-  font-family: 'Press Start 2P', cursive;
-  position: relative;
+  min-width: 300px;
+  border: 5px solid #FEF2BF;
+  color: #011F3F;
+  font-family: 'VT323', monospace;
+  box-shadow: 0 0 20px rgba(254, 242, 191, 0.3);
 }
-.modal-content h2 {
-  font-size: 1.5rem;
-  margin-bottom: 20px;
+
+.scoreModal h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
-#player-name {
-  margin: 10px 0;
-  padding: 10px;
-  width: 90%;
+
+.nameInput {
+  padding: 0.8rem;
+  margin: 1rem 0;
+  font-size: 1.8rem;
+  text-align: center;
+  text-transform: uppercase;
+  width: 120px;
   background-color: #FEF2BF;
-  border: none;
-  font-family: 'Press Start 2P', cursive;
-  font-size: 1rem;
+  border: 3px solid #011F3F;
+  border-radius: 8px;
+  color: #011F3F;
+  font-family: 'VT323', monospace;
+  letter-spacing: 2px;
+  margin-right: 2rem;
+  margin-bottom: 0;
 }
-.save-score-btn {
-  background-color: #4CAF50;
-  border: none;
+
+.nameInput::placeholder {
+  font-size: 1.2rem;
+  letter-spacing: normal;
+}
+
+.submitButton {
+  padding: 0.8rem 1.5rem;
+  background-color: #011F3F;
   color: #FEF2BF;
-  padding: 15px 32px;
+  border: 3px solid #FEF2BF;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-family: 'VT323', monospace;
+  transition: all 0.2s ease;
+}
+
+.submitButton:hover {
+  background-color: #FEF2BF;
+  color: #011F3F;
+  transform: scale(1.05);
+}
+
+.leaderboard {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: var(--primary-color);
+  border-radius: 15px;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 3px solid #FEF2BF;
+  box-shadow: 0 0 20px rgba(254, 242, 191, 0.2);
+}
+
+.leaderboard h2 {
   text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  font-family: 'Press Start 2P', cursive;
-  border-radius: 5px;
-  transition: background-color 0.3s;
+  margin-bottom: 1.5rem;
+  color: #011F3F;
+  font-family: 'VT323', monospace;
+  font-size: 2rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
-.save-score-btn:hover {
-  background-color: #45a049;
+
+.leaderboardList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
 }
-.close-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 1.5rem;
-  color: #FEF2BF;
-  cursor: pointer;
-  background: none;
-  border: none;
-  font-family: 'Press Start 2P', cursive;
+
+.leaderboardEntry {
+  display: grid;
+  grid-template-columns: 50px 1fr 100px;
+  padding: 0.8rem;
+  background-color: rgba(254, 242, 191, 0.3);
+  border-radius: 8px;
+  align-items: center;
+  color: #011F3F;
+  font-family: 'VT323', monospace;
+  font-size: 1.2rem;
+  border: 2px solid rgba(1, 31, 63, 0.2);
 }
-.close-btn:hover {
-  color: #FF4136;
+
+.leaderboardEntry span:first-child {
+  font-weight: bold;
+  color: #011F3F;
 }
+
+.leaderboardEntry span:last-child {
+  text-align: right;
+  font-weight: bold;
+  color: #011F3F;
+}
+
 .speedSelector {
   padding: 8px 12px;
   margin: 10px;

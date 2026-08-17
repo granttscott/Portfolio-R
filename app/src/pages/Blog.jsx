@@ -1,9 +1,13 @@
 import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function Blog() {
-  const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [editPost, setEditPost] = useState({
+    name: '',
+    content: ''
+  });
   const [newPost, setNewPost] = useState({
     name: '',
     content: ''
@@ -13,7 +17,12 @@ function Blog() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch('/api/blog');
+        const response = await fetch('/api/blog', {
+          headers: {
+            'Cache-Control': 'no-cache',
+            'Pragma': 'no-cache'
+          }
+        });
         if (!response.ok) throw new Error('Failed to fetch posts');
         const postsData = await response.json();
         setPosts(postsData);
@@ -24,6 +33,7 @@ function Blog() {
 
     fetchPosts();
   }, []);
+
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -66,12 +76,73 @@ function Blog() {
     }
   };
 
+  const handleEdit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(`/api/blog/${editPost.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: editPost.name,
+          content: editPost.content
+        })
+      });
+
+      if (!response.ok) throw new Error('Failed to update post');
+      
+      // Update local state
+      setPosts(posts.map(post => 
+        post.id === editPost.id ? editPost : post
+      ));
+      
+      // Close modal and reset edit state
+      setIsEditModalOpen(false);
+      setEditPost({ name: '', content: '' });
+    } catch (error) {
+      console.error('Error updating post:', error);
+    }
+  }
+
+  const editModal = () => {
+    return (
+      <div className="edit-modal">
+        <h2>Edit Post</h2>
+        <form onSubmit={handleEdit}>
+          <input
+            type="text"
+            value={editPost.name}
+            onChange={(e) => setEditPost({...editPost, name: e.target.value})}
+            placeholder="Your Name"
+            required
+          />
+          <textarea
+            value={editPost.content}
+            onChange={(e) => setEditPost({...editPost, content: e.target.value})}
+            placeholder="Editing post content..."
+            required
+          />
+          <div className="modal-actions">
+            <button type="submit" className="save-btn">Save</button>
+            <button 
+              type="button" 
+              className="cancel-btn"
+              onClick={() => {
+                setIsEditModalOpen(false);
+                setEditPost({ name: '', content: '' });
+              }}
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    )
+  }
+
   return (
     <div className="blog-container">
-      <button className="back" onClick={() => navigate(-1)}>Back</button>
-      <Link to="/">
-        <button className="home">Home</button>
-      </Link>
       <h1>Blog</h1>
       
       <div className="new-post">
@@ -90,12 +161,13 @@ function Blog() {
             placeholder="Write your post here..."
             required
           />
-          <button type="submit">Add Post</button>
+          <button className="add-post-btn" type="submit">Add Post</button>
         </form>
       </div>
 
       <div className="posts">
-        {posts.length > 0 ? (
+      {isEditModalOpen && editModal()}
+        {!isEditModalOpen && posts.length > 0 ? (
           posts.map(post => (
             <div key={post.id} className="post">
               <h3>{post.name}</h3>
@@ -107,9 +179,15 @@ function Blog() {
                   }) : 'Unknown'}
               </small>
               <div className="post-actions">
-                <Link to={`/edit-post/${post.id}`} className="edit-btn">
+                <button 
+                  onClick={() => {
+                    setIsEditModalOpen(true);
+                    setEditPost(post);
+                  }} 
+                  className="edit-btn"
+                >
                   Edit
-                </Link>
+                </button>
                 <button 
                   onClick={() => handleDelete(post.id)} 
                   className="delete-btn"
@@ -119,7 +197,7 @@ function Blog() {
               </div>
             </div>
           ))
-        ) : (
+        ) : ( !isEditModalOpen &&
           <p>No posts yet. Be the first to add one!</p>
         )}
       </div>

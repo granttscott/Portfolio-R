@@ -19,6 +19,7 @@
 
 }
 
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -63,6 +64,19 @@ button:focus-visible {
 }
 
 @media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
   :root {
     color: #213547;
     background-color: #ffffff;
@@ -199,12 +213,14 @@ button:focus-visible {
 .post {
   margin: 1rem 0;
   padding: 1rem;
-  border: 1px solid #ddd;
+  border: 1px solid var(--quaternary-color);
   border-radius: 8px;
+  background-color: var(--primary-color);
 }
 
 .post-actions {
   display: flex;
+  justify-content: space-between;
   gap: 1rem;
   margin-top: 1rem;
 }
@@ -218,15 +234,26 @@ button:focus-visible {
 }
 
 .edit-btn {
-  background: #4CAF50;
-  color: white;
+  background: var(--secondary-color);
+  color: var(--quaternary-color);
   text-decoration: none;
 }
 
 .delete-btn {
-  background: #f44336;
-  color: white;
+  background: var(--quaternary-color);
+  color: var(--primary-color);
 }
+
+.add-post-btn {
+  background: var(--quaternary-color);
+  color: var(--primary-color);
+}
+
+.add-post-btn:hover {
+  background: var(--tertiary-color);
+  color: var(--primary-color);
+}
+
 .rpsContainer {
   display: flex;
   justify-content: space-evenly; /* Spread items evenly */

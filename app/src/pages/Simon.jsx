@@ -12,8 +12,52 @@ const Simon = () => {
   const [isHardMode, setIsHardMode] = useState(true);
   const [showRetry, setShowRetry] = useState(false);
   const [speed, setSpeed] = useState(300);
-
+  const [showNameModal, setShowNameModal] = useState(false);
+  const [playerName, setPlayerName] = useState('');
+  const [leaderboard, setLeaderboard] = useState([]);
   const buttonColors = ["red", "blue", "green", "yellow"];
+
+  // Fetch leaderboard on component mount
+  useEffect(() => {
+    fetchLeaderboard();
+  }, []);
+
+  const fetchLeaderboard = async () => {
+    try {
+      const response = await fetch('/api/leaderboard');
+      const data = await response.json();
+      setLeaderboard(data);
+    } catch (error) {
+      console.error('Error fetching leaderboard:', error);
+    }
+  };
+
+  const submitScore = async (name) => {
+    try {
+      await fetch('/api/leaderboard', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: name.toUpperCase(),
+          score: highScore
+        })
+      });
+      fetchLeaderboard();
+    } catch (error) {
+      console.error('Error submitting score:', error);
+    }
+  };
+
+  const handleNameSubmit = (e) => {
+    e.preventDefault();
+    if (playerName.length <= 3) {
+      submitScore(playerName);
+      setShowNameModal(false);
+      setPlayerName('');
+    }
+  };
 
   const startGame = useCallback(() => {
     setUserPattern([]);
@@ -45,15 +89,12 @@ const handleButtonClick = (color) => {
     audio.play();
   };
 
-  const animateSequence = useCallback(() => {
-    console.log('Animating sequence:', gamePattern);
-    
+  const animateSequence = useCallback(() => {    
     // Clear any existing timeouts
     const timeouts = [];
     
     gamePattern.forEach((color, index) => {
       const timeout = setTimeout(() => {
-        console.log('Animating color:', color, 'at index:', index);
         animateButton(color);
         playSound(color);
       }, (speed + 200) * index); // Changed to 1000ms (1 second) between each animation
@@ -67,10 +108,8 @@ const handleButtonClick = (color) => {
   const randomColor = useCallback(() => {
     const num = Math.floor(Math.random() * 4);
     const color = buttonColors[num];
-    console.log('Adding new color to pattern:', color);
     setGamePattern(prev => {
       const newPattern = [...prev, color];
-      console.log('New game pattern:', newPattern);
       return newPattern;
     });
   }, []);
@@ -78,7 +117,6 @@ const handleButtonClick = (color) => {
   // Update useEffect to trigger animation after pattern changes
   useEffect(() => {
     if (gamePattern.length > 0) {
-      console.log('Pattern changed, starting animation');
       animateSequence();
     }
   }, [gamePattern, animateSequence]);
@@ -104,6 +142,7 @@ const handleButtonClick = (color) => {
         
         if (gamePattern.length > highScore) {
           setHighScore(gamePattern.length);
+          setShowNameModal(true);
         }
       }
     }
@@ -128,10 +167,8 @@ const handleButtonClick = (color) => {
 
   return (
     <div className={styles.gameContainer}>
-      <button className="back" onClick={() => navigate(-1)}>Back</button>
-        <Link to="/">
-          <button className="home">Home</button>
-        </Link>      <button onClick={() => setIsHardMode(!isHardMode)}>
+      <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '10px', gap: '20px'}}>
+      <button onClick={() => setIsHardMode(!isHardMode)}>
         Toggle Color Change
       </button>
       <button onClick={startGame}>Start</button>
@@ -145,6 +182,7 @@ const handleButtonClick = (color) => {
         <option value={150}>Fast</option>
         <option value={75}>Very Fast</option>
       </select>
+      </div>
       <h1>{level}</h1>
       {showRetry && <h1>Press Any Key to Retry!</h1>}
       <h2>High Score: {highScore}</h2>
@@ -166,6 +204,40 @@ const handleButtonClick = (color) => {
             onClick={() => handleButtonClick(color)}
           />
         ))}
+      </div>
+
+      {/* Name Input Modal */}
+      {showNameModal && (
+        <div className={styles.scoreModalOverlay}>
+          <div className={styles.scoreModal}>
+            <h2>New High Score!</h2>
+            <form onSubmit={handleNameSubmit}>
+              <input
+                type="text"
+                maxLength={3}
+                value={playerName}
+                onChange={(e) => setPlayerName(e.target.value)}
+                placeholder="INITIALS"
+                className={styles.nameInput}
+              />
+              <button type="submit" className={styles.submitButton}>Submit</button>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Leaderboard */}
+      <div className={styles.leaderboard}>
+        <h2>Leaderboard</h2>
+        <div className={styles.leaderboardList}>
+          {leaderboard.map((entry, index) => (
+            <div key={entry.id} className={styles.leaderboardEntry}>
+              <span>{index + 1}.</span>
+              <span>{entry.name}</span>
+              <span>{entry.score}</span>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

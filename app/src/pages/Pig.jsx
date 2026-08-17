@@ -32,7 +32,7 @@ function Pig() {
   }, 1500);
 };
   const handleHold = () => {
-    if ((scores[`player${activePlayer}`] + currentScore) >= 10) {
+    if ((scores[`player${activePlayer}`] + currentScore) >= 100) {
       setScores(prevScores => ({
         ...prevScores,
         [`player${activePlayer}`]: prevScores[`player${activePlayer}`] + currentScore
@@ -57,60 +57,56 @@ function Pig() {
   const navigate = useNavigate();
 
   return (
-        <div className={styles.gameContainer}>
-        <button className="back" onClick={() => navigate(-1)}>Back</button>
-        <Link to="/">
-          <button className="home">Home</button>
-        </Link>
-          <button className={styles.btnNew} onClick={handleNewGame}>
-            🔄 New Game
-          </button>
-          <div className={styles.gameInfo}>
-            <p> {!isPlaying ? 'Game over' : `Player ${activePlayer} is currently playing`}</p>
-          </div>
-    
-          <div className={styles.playersContainer}>
-            <div className={`${styles.player} ${activePlayer === 1 ? styles.active : ''}`}>
-              <h2>Player 1</h2>
-              <div className={styles.score}>{scores.player1}</div>
-              <div className={styles.current}>
-                <p>Current</p>
-                <p>{activePlayer === 1 ? currentScore : 0}</p>
-              </div>
-            </div>
-
-            <div className={styles.diceContainer}>
-              <Dice value={diceValue} isRolling={isRolling} />
-            </div>
-    
-            <div className={`${styles.player} ${activePlayer === 2 ? styles.active : ''}`}>
-              <h2>Player 2</h2>
-              <div className={styles.score}>{scores.player2}</div>
-              <div className={styles.current}>
-                <p>Current</p>
-                <p>{activePlayer === 2 ? currentScore : 0}</p>
-              </div>
-            </div>
-          </div>
-    
-          <div className={styles.gameControls}>
-            <button 
-              className={styles.btnRoll} 
-              onClick={handleRollDice}
-              disabled={!isPlaying || isRolling}
-            >
-                  🎲 Roll Dice
-        </button>
-        <button 
-          className={styles.btnHold} 
-          onClick={handleHold}
-          disabled={!isPlaying}
-        >
-          📥 Hold
-        </button>
+    <div className={styles.gameContainer}>
+      <button className={styles.btnNew} onClick={handleNewGame}>
+        🔄 New Game
+      </button>
+      <div className={styles.gameInfo}>
+        <p> {!isPlaying ? 'Game over' : `Player ${activePlayer} is currently playing`}</p>
       </div>
+    
+      <div className={styles.playersContainer}>
+        <div className={`${styles.player} ${activePlayer === 1 ? styles.active : ''}`}>
+          <h2>Player 1</h2>
+          <div className={styles.score}>{scores.player1}</div>
+          <div className={styles.current}>
+            <p>Current</p>
+            <p>{activePlayer === 1 ? currentScore : 0}</p>
+          </div>
+        </div>
+
+        <div className={styles.diceContainer}>
+          <Dice value={diceValue} isRolling={isRolling} />
+        </div>
+    
+        <div className={`${styles.player} ${activePlayer === 2 ? styles.active : ''}`}>
+          <h2>Player 2</h2>
+          <div className={styles.score}>{scores.player2}</div>
+          <div className={styles.current}>
+            <p>Current</p>
+            <p>{activePlayer === 2 ? currentScore : 0}</p>
+          </div>
+        </div>
+      </div>
+    
+      <div className={styles.gameControls}>
+        <button 
+          className={styles.btnRoll} 
+          onClick={handleRollDice}
+          disabled={!isPlaying || isRolling}
+        >
+              🎲 Roll Dice
+      </button>
+      <button 
+        className={styles.btnHold} 
+        onClick={handleHold}
+        disabled={!isPlaying}
+      >
+        📥 Hold
+      </button>
     </div>
-  );
+  </div>
+);
 }
 
 export default Pig;

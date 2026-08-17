@@ -1,31 +1,45 @@
 import { Link } from 'react-router-dom';
 import '../index.css';
+import { Typography } from '@mui/material';
 
 function Resume() {
   return (
-    <div className="resume-container">
-      <Link to="/" className="back-button">Home</Link>
-      
+    <div className="resume-container">      
       <div className="contact-info">
-        <a href="tel:1-775-287-1631">(775) 287-1631</a>
-        <br/>
-        <a href="mailto:Granttscott@gmail.com">Granttscott@gmail.com</a>
+        <Typography variant="body1">
+          Phone: 
+          <a href="tel:1-775-287-1631"> (775) 287-1631</a>
+          <br/>
+          Email: 
+          <a href="mailto:Granttscott@gmail.com"> Granttscott@gmail.com</a>
+        </Typography>
       </div>
-
+      <Link to="/">
       <h1 className="resume-header">Grant Scott</h1>
-
+      </Link>
       <div className="resume-body">
-        <h4 className="objective">
-          Driven to achieve excellence in any task presented. Exceptional customer satisfaction qualities. Strong aptitude for developing new skills.
-        </h4>
+        <Typography variant="body1" className="objective">
+        Detail-oriented Software Engineer experienced in full-stack web development with React and Express, focused on delivering scalable solutions and optimizing performance. Skilled collaborator with strong problem-solving abilities and a background in customer support and technical troubleshooting.        
+        </Typography>
 
         <hr/>
         <h2>EXPERIENCE</h2>
         <hr/>
 
         <div className="experience-section">
-          <h3>The Change Companies, Carson City, Nevada - Account Services Engineer</h3>
-          <h4>May 2023 - Present</h4>
+          <h3>The Change Companies, Carson City, Nevada - Software Engineer</h3>
+          <h4>January 2025 - Present</h4>
+          <ul>
+            <li>Work with React and Express to fulfill page requirements for Atlas, our company's eReading platform for interactive journaling</li>
+            <li>Collaborate with senior engineers to design, develop, and deploy features in a full-stack web application using JavaScript</li>
+            <li>Utilize Git for version control and participate in daily code reviews and pull requests to maintain high code quality standards</li>
+            <li>Get hands-on experience with tools such as Postman (API testing) and Jira (task management)</li>
+            <li>Write clean, maintainable code and contribute to improving application performance by optimizing API calls and reducing load time by 25%</li>
+            <li>Expert on shopify integration and development</li>
+          </ul>
+
+          <h3>Account Services Engineer</h3>
+          <h4>May 2023 - January 2025</h4>
           <ul>
             <li>Manage customer ticket portal and help center</li>
             <li>Triage support tickets and serve as liaison with software engineering team</li>
@@ -102,6 +116,7 @@ function Resume() {
           text-align: left;
           color: black;
           padding: 20px;
+          padding-top: 70px;
         }
         
         .back-button {
@@ -110,15 +125,17 @@ function Resume() {
         }
 
         .contact-info {
-          margin-bottom: 20px;
+          margin-bottom: 10px;
         }
 
         .resume-header {
           color: black;
+          margin-top: 0;
         }
 
         .objective {
-          text-align: center;
+          text-align: left;
+          font-family: serif;
         }
 
         li {

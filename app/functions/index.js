@@ -79,7 +79,7 @@ router.get("/papers/search", async (req, res) => {
       const postsSnapshot = await db.collection('posts')
         .orderBy('date', 'desc')
         .get();
-      
+      console.log('postsSnapshot', postsSnapshot);
       const posts = postsSnapshot.docs.map(doc => ({
         id: doc.id,
         ...doc.data(),
@@ -193,7 +193,8 @@ router.get("/leaderboard", async (req, res) => {
 });
 
 exports.api = onRequest({
-    memory: '256MiB',  // Optional: Specify memory allocation
-    timeoutSeconds: 60,  // Optional: Specify timeout
-    cors: true  // Enable CORS for the function
+    memory: '256MiB',
+    timeoutSeconds: 60,
+    cors: true,
+    region: 'us-central1'
   }, app);

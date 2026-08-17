@@ -9,11 +9,9 @@ import paperWinImg from '../assets/images/paper.png';
 import scissorsWinImg from '../assets/images/scissors.png';
 
 const RPS = () => {
-  const navigate = useNavigate();
   const [gameStatus, setGameStatus] = useState("Press Play to Start");
   const [player1Image, setPlayer1Image] = useState(rockImg);
   const [player2Image, setPlayer2Image] = useState(rockImg);
-
 
   const handleSelection = (selectElement) => {
     if (selectElement.target.id === 'manualSelectP1' || selectElement.target.id === 'manualSelectP2') {
@@ -87,11 +85,6 @@ const RPS = () => {
 
   return (
     <>
-      <button className="back" onClick={() => navigate(-1)}>Back</button>
-        <Link to="/">
-          <button className="home">Home</button>
-        </Link>
-
       <header>
         <h1 className="header">Rock - Paper - Scissors</h1>
       </header>

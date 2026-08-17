@@ -1,5 +1,6 @@
-import { Routes, Route, Link, useLocation } from 'react-router-dom'
-import Header from './components/Header.jsx'
+import { Routes, Route, useLocation } from 'react-router-dom'
+import { useState } from 'react'
+import Sidebar from './components/Sidebar.jsx'
 import Resume from './pages/Resume.jsx'
 import Projects from './pages/Projects.jsx'
 import Blog from './pages/Blog.jsx';
@@ -14,30 +15,20 @@ import BinAudit from './pages/BinAudit';
 import Simon from './pages/Simon';
 import Articles from './pages/Articles';
 import Pig from './pages/Pig';
+import OtherWebsites from './pages/OtherWebsites';
 import './App.css'
+import Home from './pages/Home.jsx';
 
 function App() {
   const location = useLocation();
   const isHomePage = location.pathname === '/';
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
-      {isHomePage && <Header />}
+      <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
       <Routes>
-        <Route path="/" element={
-          <div className="home-content">
-            {/* Your home page content */}
-            <h1>Welcome!</h1>
-            {/* Add more home page content here */}
-          <br/>
-            <div className="project-button">
-              <Link to="/projects" className="project-link">
-                View My Projects
-                <span className="arrow">→</span>
-              </Link>
-            </div>
-            </div>
-        } />
+        <Route path="/" element={<Home isOpen={isOpen} setIsOpen={setIsOpen} />} />
         
         <Route path="/resume" element={<Resume />} />
         <Route path="/projects" element={<Projects />} />
@@ -53,6 +44,7 @@ function App() {
         <Route path="/simon" element={<Simon />} />
         <Route path="/articles" element={<Articles />} />
         <Route path="/pig" element={<Pig />} />
+        <Route path="/other-websites" element={<OtherWebsites />} />
       </Routes>
     </>
   )

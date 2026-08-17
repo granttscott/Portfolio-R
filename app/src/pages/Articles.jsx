@@ -10,6 +10,7 @@ const Articles = ({ papers, searchQuery }) => {
           <button className="home">Home</button>
         </Link>      
         <hr />
+      <h1>This was imported and routes have bot yet been corrected. E.G DOES NOT WORK</h1>
       <form action="/search" method="get">
         <input 
           type="text" 

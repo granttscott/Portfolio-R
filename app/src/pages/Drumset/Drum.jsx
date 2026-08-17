@@ -3,7 +3,6 @@ import './Drum.css';
 import { Link, useNavigate } from 'react-router-dom';
 
 function Drum() {
-  const navigate = useNavigate();
   useEffect(() => {
     const drums = document.querySelectorAll('.drum');
     drums.forEach(drum => {
@@ -46,10 +45,7 @@ function Drum() {
 
   return (
     <div className="drum-kit">
-      <button className="back" onClick={() => navigate(-1)}>Back</button>
-        <Link to="/">
-          <button className="home">Home</button>
-        </Link>      <h1 id="title">Drum 🥁 Kit</h1>
+      <h1 id="title">Drum 🥁 Kit</h1>
       <div className="set">
         <button className="z drum">z</button>
         <button className="x drum">x</button>
@@ -59,9 +55,6 @@ function Drum() {
         <button className="n drum">n</button>
         <button className="m drum">m</button>
       </div>
-      <footer>
-        Made with ❤️ in London.
-      </footer>
     </div>
   );
 }

@@ -47,14 +47,8 @@ const styles = `
 `;
 
 const Art = () => {
-  const navigate = useNavigate();
   return (
     <div>
-      <button className="back" onClick={() => navigate(-1)}>Back</button>
-        <Link to="/">
-          <button className="home">Home</button>
-        </Link>
-
       <header>
         <h1 className="header">Mondrian Art</h1>
         <p>A recreation of the Mondrian art style using CSS Grid.</p>
